@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<ruleset name="Drgnff WP Coding Standards">
+	<description>Starting Point Rule Set.</description>
+
+	<!-- How to scan -->
+	<!-- Usage instructions: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Usage -->
+	<!-- Annotated ruleset: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml -->
+	<arg value="sp"/><!-- Show sniff and progress -->
+	<arg name="basepath" value="./"/><!-- Strip the file paths down to the relevant bit -->
+	<arg name="colors"/>
+	<arg name="extensions" value="php"/>
+	<arg name="parallel" value="8"/><!-- Enables parallel processing when available for faster results. -->
+
+	<config name="minimum_supported_wp_version" value="5.7.0"/>
+
+	<!-- @see https://github.com/PHPCompatibility/PHPCompatibility#using-a-custom-ruleset -->
+	<config name="testVersion" value="7.4-"/>
+
+	<!-- What to scan -->
+	<file>drgnff-wp-stage-switcher.php</file>
+	<file>src</file>
+	<file>tests</file>
+
+	<!-- @see https://github.com/PHPCompatibility/PHPCompatibilityWP#how-to-use -->
+	<rule ref="PHPCompatibilityWP"/>
+
+	<!-- @see https://github.com/slevomat/coding-standard -->
+	<rule ref="SlevomatCodingStandard">
+		<exclude name="SlevomatCodingStandard.Arrays.SingleLineArrayWhitespace"/>
+		<exclude name="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion"/>
+		<exclude name="SlevomatCodingStandard.Classes.ForbiddenPublicProperty"/>
+		<exclude name="SlevomatCodingStandard.ControlStructures.BlockControlStructureSpacing"/>
+		<exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit"/>
+		<exclude name="SlevomatCodingStandard.ControlStructures.NewWithoutParentheses"/>
+		<exclude name="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison"/>
+		<exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration"/>
+		<exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall"/>
+		<exclude name="SlevomatCodingStandard.Functions.RequireMultiLineCall"/>
+		<exclude name="SlevomatCodingStandard.Functions.FunctionLength.FunctionLength"/>
+		<exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions"/>
+		<exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalConstants"/>
+		<exclude name="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces"/>
+		<exclude name="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment"/>
+		<exclude name="SlevomatCodingStandard.Files"/>
+	</rule>
+
+	<!-- @see https://github.com/Automattic/phpcs-neutron-ruleset -->
+	<rule ref="NeutronRuleset">
+		<exclude name="ImportDetection"/>
+	</rule>
+
+	<rule ref="NeutronStandard.Functions.VariableFunctions">
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+
+	<rule ref="WordPress.WP.AlternativeFunctions">
+		<exclude-pattern>tests/*</exclude-pattern>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="drgnff-wp-stage-switcher"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<!-- Value: replace the function, class, and variable prefixes used. Separate multiple prefixes with a comma. -->
+			<property name="prefixes" type="array" value="drgnff_wp_stage_switcher__,Drgnff\WP\StageSwitcher"/>
+		</properties>
+	</rule>
+</ruleset>
