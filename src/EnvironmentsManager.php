@@ -6,57 +6,58 @@ namespace Drgnff\WP\StageSwitcher;
 
 class EnvironmentsManager {
 
-	private string $const_name;
+	private Constants $constants;
 
 	/** @var array<\Drgnff\WP\StageSwitcher\Environment> */
 	private array $environments;
 	private Environment $current_environment;
+	private int $default_env_index = -1;
+	private bool $is_current_environment_unknown = true;
 
-	/** @var array<string> */
-	private array $default_environment;
-
-	public function run(): void {
-		add_action( 'init', [ $this, 'init_props' ] );
+	public function __construct( Constants $constants ) {
+		$this->constants = $constants;
 	}
 
-	public function init_props(): void {
-		$this->const_name = apply_filters( 'drgnff_wp_stage_switcher__const_name', 'DRGNFF_WP_STAGE_SWITCHER__ENVS' );
-		$this->default_environment = apply_filters(
-			'drgnff_wp_stage_switcher__default_environment', [
-				'title' => __( 'UNKNOWN', 'drgnff-wp-stage-switcher' ),
-				'slug' => 'unknown',
-				'color' => '#FFFFFF',
-				'background_color' => '#663399',
-			]
-		);
-
-		$environments = defined( $this->const_name )
-			? constant( $this->const_name )
-			: [];
-		$environments = apply_filters( 'drgnff_wp_stage_switcher__envs', $environments );
+	public function run(): void {
+		// Setup all environments.
+		$environments = get_option( 'drgnff_wp_stage_switcher__environments' );
+		if ( ! is_array( $environments ) ) {
+			$environments = [];
+		}
+		$environments = apply_filters( 'drgnff_wp_stage_switcher__environments', $environments );
 
 		array_walk(
-			$environments, function( $env, $stage_url ): void {
-				$this->environments[ self::parse_stage_url( $stage_url ) ] = new Environment(
+			$environments,
+			function( $env, $i ): void {
+				$url = self::parse_stage_url( $env['url'] );
+				if ( $url === home_url() ) {
+					$this->default_env_index = $i;
+					$this->is_current_environment_unknown = false;
+				}
+
+				$this->environments[] = new Environment(
+					$url,
 					$env['title'],
-					$env['slug'],
 					$env['color'] ?? '',
 					$env['background_color'] ?? ''
 				);
 			}
 		);
 
-		if ( ! isset( $this->environments[ home_url() ] ) ) {
-			$this->environments[ home_url() ] = new Environment(
-				$this->default_environment['title'],
-				$this->default_environment['slug'],
-				$this->default_environment['color'],
-				$this->default_environment['background_color']
+		// Setup default environment.
+		$default_environment = $this->constants->get( 'default_environment' );
+
+		if ( $this->default_env_index < 0 ) {
+			$this->environments[] = new Environment(
+				home_url(),
+				$default_environment['title'],
+				$default_environment['color'] ?? '',
+				$default_environment['background_color'] ?? ''
 			);
+			$this->default_env_index = count( $this->environments ) - 1;
 		}
 
-		$this->current_environment = $this->environments[ home_url() ];
-		unset( $this->environments[ home_url() ] );
+		$this->current_environment = $this->environments[ $this->default_env_index ];
 	}
 
 	/** @return array<\Drgnff\WP\StageSwitcher\Environment> */
@@ -69,11 +70,17 @@ class EnvironmentsManager {
 	}
 
 	public function needs_styles(): bool {
-		return $this->current_environment->color && $this->current_environment->background_color;
+		return $this->current_environment->color || $this->current_environment->background_color;
+	}
+
+	public function is_current_environment_unknown(): bool {
+		return $this->is_current_environment_unknown;
 	}
 
 	private static function parse_stage_url( string $stage_url ): string {
 		if ( is_multisite() ) {
+			$stage_url = untrailingslashit( $stage_url );
+
 			if ( is_subdomain_install() && ! is_main_site() ) {
 				$stage_host = wp_parse_url( $stage_url, PHP_URL_HOST );
 				$stage_host_parts = explode( '.', $stage_host );

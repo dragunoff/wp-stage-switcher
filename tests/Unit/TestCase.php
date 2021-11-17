@@ -10,7 +10,7 @@ use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase as FrameworkTestCase;
 
-// phpcs:disable PHPCompatibility.FunctionDeclarations.NewReturnTypeDeclarations.voidFound
+// phpcs:ignore PHPCompatibility.FunctionDeclarations.NewReturnTypeDeclarations.voidFound
 
 class TestCase extends FrameworkTestCase {
 
@@ -24,10 +24,16 @@ class TestCase extends FrameworkTestCase {
 		Functions\stubEscapeFunctions();
 		Functions\stubTranslationFunctions();
 
-		Functions\stubs( [ 'sanitize_html_class', 'plugin_basename' ] );
+		Functions\stubs(
+			[
+				'sanitize_html_class',
+				'plugin_basename',
+			]
+		);
 
 		Functions\when( 'home_url' )->justReturn( 'https://example.com' );
 		Functions\when( 'get_home_url' )->justReturn( 'https://example.com' );
+		Functions\when( 'sanitize_hex_color' )->returnArg();
 
 		Functions\when( 'wp_parse_args' )->alias( 'array_merge' );
 		Functions\when( 'wp_parse_url' )->alias( 'parse_url' );

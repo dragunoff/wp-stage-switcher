@@ -17,7 +17,7 @@
 	<config name="testVersion" value="7.4-"/>
 
 	<!-- What to scan -->
-	<file>drgnff-wp-stage-switcher.php</file>
+	<file>set-the-stage.php</file>
 	<file>src</file>
 	<file>tests</file>
 
@@ -33,6 +33,8 @@
 		<exclude name="SlevomatCodingStandard.ControlStructures.EarlyExit"/>
 		<exclude name="SlevomatCodingStandard.ControlStructures.NewWithoutParentheses"/>
 		<exclude name="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison"/>
+		<exclude name="SlevomatCodingStandard.ControlStructures.RequireShortTernaryOperator"/>
+		<exclude name="SlevomatCodingStandard.Functions.RequireArrowFunction"/>
 		<exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration"/>
 		<exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall"/>
 		<exclude name="SlevomatCodingStandard.Functions.RequireMultiLineCall"/>
@@ -44,9 +46,25 @@
 		<exclude name="SlevomatCodingStandard.Files"/>
 	</rule>
 
+	<rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly">
+		<properties>
+			<property name="allowFullyQualifiedExceptions" value="true"/>
+		</properties>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator">
+		<properties>
+			<property name="minExpressionsLength" value="40"/>
+		</properties>
+	</rule>
+
 	<!-- @see https://github.com/Automattic/phpcs-neutron-ruleset -->
 	<rule ref="NeutronRuleset">
 		<exclude name="ImportDetection"/>
+
+		<exclude name="NeutronStandard.Functions.TypeHint.ExtraSpace"/>
+		<exclude name="NeutronStandard.Functions.TypeHint.NoReturnType"/>
+		<exclude name="NeutronStandard.Functions.LongFunction"/>
 	</rule>
 
 	<rule ref="NeutronStandard.Functions.VariableFunctions">

@@ -18,4 +18,14 @@ class Helpers {
 		return 'https://test-' . rand() . '.localhost';
 	}
 
+	public static function strip_whitespace( string $str ): string {
+		$whitespace = [
+			"\n",
+			"\r",
+			"\t",
+		];
+
+		return str_replace( $whitespace, '', $str );
+	}
+
 }

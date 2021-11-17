@@ -1,0 +1,81 @@
+.c-env-row {
+	display: grid;
+	gap: 0 1em;
+	grid-template-columns: 10px repeat(2, fit-content(300px)) repeat(3, fit-content(200px))
+}
+
+.c-env-row:only-child {
+	display: none;
+}
+
+.c-env-cell {
+	padding: 0.5em 0;
+	width: 260px;
+}
+
+.c-env-cell--full {
+	grid-column: 1 / -1;
+}
+
+.c-env-cell:nth-child(1) {
+	width: auto;
+}
+
+.c-env-cell:nth-child(4),
+.c-env-cell:nth-child(5) {
+	width: 104px;
+}
+
+.c-env-cell--label {
+	white-space: nowrap;
+}
+
+.c-env-cell input {
+	display: block;
+	width: 100%;
+}
+
+.c-env-cell label {
+	font-weight: bold;
+}
+
+.c-env-row--disabled .wp-picker-container {
+	pointer-events: none;
+}
+
+/** Color picker overrides */
+.wp-picker-container {
+	position: relative;
+	display: flex;
+}
+
+.wp-picker-container .wp-color-result.button {
+	margin-right: 0;
+	margin-bottom: 0;
+}
+
+.wp-picker-open + .wp-picker-input-wrap {
+	position: absolute;
+	top: 36px;
+	z-index: 2;
+
+	display: flex;
+	padding: 6px;
+
+	background: white;
+	border: 1px solid #dcdcde;
+	border-bottom: none;
+}
+
+.wp-picker-holder {
+	position: absolute;
+	z-index: 1;
+	top: 72px;
+}
+
+/** Sortable */
+.c-sortable-handle {
+	display: inline-block;
+	cursor: grab;
+	padding: 0.5em 0;
+}

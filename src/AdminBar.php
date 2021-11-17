@@ -19,10 +19,6 @@ class AdminBar {
 	}
 
 	public function run(): void {
-		add_action( 'init', [ $this, 'init_props' ] );
-	}
-
-	public function init_props(): void {
 		$this->environments = $this->env_manager->get_environments();
 		$this->current_environment = $this->env_manager->get_current_environment();
 
@@ -43,13 +39,17 @@ class AdminBar {
 		];
 		$wp_admin_bar->add_node( $args );
 
-		foreach ( $this->environments as $stage_url => $env ) {
+		foreach ( $this->environments as $env ) {
+			if ( $this->current_environment->url === $env->url ) {
+				continue;
+			}
+
 			$wp_admin_bar->add_node(
 				[
-					'id' => 'drgnff_wp_stage_switcher__' . sanitize_html_class( strtolower( $env->slug ) ),
+					'id' => 'drgnff_wp_stage_switcher__' . sanitize_html_class( strtolower( $env->url ) ),
 					'parent' => 'drgnff_wp_stage_switcher',
 					'title' => esc_html( $env->title ),
-					'href' => esc_url( self::parse_stage_url( $stage_url ) ),
+					'href' => esc_url( self::parse_stage_url( $env->url ) ),
 				]
 			);
 		}
@@ -62,13 +62,13 @@ class AdminBar {
 				#wp-admin-bar-drgnff_wp_stage_switcher > .ab-item > .ab-icon::before,
 				#wp-admin-bar-drgnff_wp_stage_switcher > .ab-item > .ab-label,
 				#wp-admin-bar-drgnff_wp_stage_switcher > .ab-item {
-				color: <?php echo sanitize_hex_color( $this->current_environment->color ); ?> !important;
+				color: <?php echo esc_html( sanitize_hex_color( $this->current_environment->color ) ); ?> !important;
 			}
 			<?php } ?>
 
 			<?php if ( $this->current_environment->background_color ) { ?>
 				#wp-admin-bar-drgnff_wp_stage_switcher > .ab-item {
-					background-color: <?php echo sanitize_hex_color( $this->current_environment->background_color ); ?> !important;
+					background-color: <?php echo esc_html( sanitize_hex_color( $this->current_environment->background_color ) ); ?> !important;
 				}
 			<?php } ?>
 		</style>

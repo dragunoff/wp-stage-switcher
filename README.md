@@ -1,47 +1,11 @@
 # Stage switcher for WordPress
 
-This plugin adds a menu to the admin bar that helps quickly identify different environments for a site (e.g. production and development) and easily switch to the same URL on other environments. The plugin is multi-site compatible for both sub-domain and sub-directory installations.
+Adds a menu to the admin bar to quickly identify different environments for a site (e.g. production and development) and easily switch to the same URL on other environments. Multi-site compatible for both sub-domain and sub-directory installations.
 
-## Installation
+![The plugin in action](screenshots/screenshot-1.png)
 
-A bit of configuration is requiered for this plugin to function. There is no graphical UI so this has to be done using a PHP constant or a WordPress filter hook.
-
-### Configuration using a PHP constant
-
-Here's an example configuration array:
-
-```php
-define( 'DRGNFF_WP_STAGE_SWITCHER__ENVS', [
-	'https://example.com' => [ // the array key is the home url
-		'title' => 'LIVE', // display name
-		'slug' => 'production', // unique ID
-		'color' => '#FFFFFF', // hex color, optional
-		'background_color' => '#FF0000', // hex color, optional
-	],
-	'http://example.localhost' => [
-		'title' => 'DEVELOPMENT',
-		'slug' => 'development',
-		'color' => '#FFFFFF',
-		'background_color' => '#228B22',
-	],
-]);
-```
-
-_Note:_ For multi-site subdomain installations use the URLs of the main site.
-
-The name of the constant can be changed via the filter hook `drgnff_wp_stage_switcher__const_name`.
-
-### Configuration using a WordPress filter hook
-
-Hook to `drgnff_wp_stage_switcher__envs` and return an array similar to the one mentioned above in the PHP constant section.
-
-### Controlling visibility of the switcher
-
-By hooking to `drgnff_wp_stage_switcher__should_display_switcher` and returning a boolean you can control whether the switcher should be rendered. By default it's rendered for all logged in users.
-
-### Overriding the default environment
-
-By hooking to `drgnff_wp_stage_switcher__default_environment` you can control the title and colors for the default environment. The default environment (labeled as "UNKNOWN") is used when the current environment is not among the ones in the configuration.
+## Installation and configuration
+Refer to the [plugin readme file](readme.txt).
 
 ## Development
 Install development dependencies:
@@ -72,4 +36,8 @@ composer run watch
 
 ## Screenshots
 
-![The plugin in action](screenshots/screenshot.png)
+![The settings page](screenshots/screenshot-2.png)
+The settings page
+
+![The settings page](screenshots/screenshot-3.png)
+Adding the current environment to the list
