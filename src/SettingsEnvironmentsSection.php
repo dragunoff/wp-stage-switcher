@@ -253,16 +253,14 @@ class SettingsEnvironmentsSection {
 							?>
 						</div>
 
-						<?php if ( ! $disabled ) : ?>
-							<div class="c-env-cell">
-								<button
-									type="button"
-									class="button button-secondary js-drgnff-row-remove"
-								>
-									<?php esc_html_e( 'Remove', 'drgnff-wp-stage-switcher' ); ?>
-								</button>
-							</div>
-						<?php endif; ?>
+						<div class="c-env-cell">
+							<button
+								type="button"
+								class="button button-secondary js-drgnff-row-remove"
+							>
+								<?php esc_html_e( 'Remove', 'drgnff-wp-stage-switcher' ); ?>
+							</button>
+						</div>
 					</div>
 				</script>
 			</div>
