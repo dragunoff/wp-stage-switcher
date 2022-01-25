@@ -2,7 +2,7 @@
 
 Adds a menu to the admin bar to quickly identify different environments for a site (e.g. production and development) and easily switch to the same URL on other environments. Multi-site compatible for both sub-domain and sub-directory installations.
 
-![The plugin in action](screenshots/screenshot-1.png)
+![The plugin in action](.wordpress-org/screenshot-1.png)
 
 ## Installation and configuration
 Refer to the [plugin readme file](readme.txt).
@@ -46,8 +46,8 @@ composer run test:watch
 
 ## Screenshots
 
-![The settings page](screenshots/screenshot-2.png)
+![The settings page](.wordpress-org/screenshot-2.png)
 The settings page
 
-![The settings page](screenshots/screenshot-3.png)
+![The settings page](.wordpress-org/screenshot-3.png)
 Adding the current environment to the list
