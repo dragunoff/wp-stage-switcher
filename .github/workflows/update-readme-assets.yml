@@ -1,0 +1,18 @@
+name: Update readme and assets
+
+on:
+  workflow_dispatch:
+
+jobs:
+  trunk:
+    name: Push to trunk
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: WordPress.org plugin asset/readme update
+      uses: 10up/action-wordpress-plugin-asset-update@380f65177c26104f66254f25e5fb7926b782029a
+      env:
+        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+        SLUG: set-the-stage
+        IGNORE_OTHER_FILES: true
