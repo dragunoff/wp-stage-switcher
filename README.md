@@ -13,15 +13,25 @@ Install development dependencies:
 composer install
 ```
 
-### Codestyle and linting
+### Codestyle, linting and static analysis
+Check for syntax errors:
+```sh
+composer run cs:check
+```
+
+Perform code static analysis:
+```sh
+composer run analyse
+```
+
 Check for codestyle violations:
 ```sh
-composer run lint
+composer run cs:check
 ```
 
 Automatically fix codestyle violations:
 ```sh
-composer run fix
+composer run cs:fix
 ```
 ### Tests
 Run unit tests:
@@ -31,7 +41,7 @@ composer run test
 
 Run unit tests continuously:
 ```sh
-composer run watch
+composer run test:watch
 ```
 
 ## Screenshots
