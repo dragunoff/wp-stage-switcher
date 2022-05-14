@@ -3,7 +3,7 @@ Contributors: dragunoff
 Tags: stage, environment, switcher, menu
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.4
 Requires at least: 4.7
 Tested up to: 6.0
@@ -71,6 +71,10 @@ The default environment is used for the current site if it's not in the list of 
 1. Adding the current environment to the list
 
 == Changelog ==
+
+= 1.0.1 =
+**Fixed**
+- Fix default environment reset button
 
 = 1.0.0 =
 * Initial release.

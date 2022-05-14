@@ -1,15 +1,15 @@
-# Copyright (C) 2021 Ivaylo Draganov
+# Copyright (C) 2022 Ivaylo Draganov
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Set the Stage 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/drgnff-wp-stage-switcher\n"
+"Project-Id-Version: Set the Stage 1.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/set-the-stage\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-12-22T11:56:06+02:00\n"
+"POT-Creation-Date: 2022-05-14T09:36:49+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: drgnff-wp-stage-switcher\n"
@@ -97,7 +97,7 @@ msgid "These will be printed in order in the admin bar menu."
 msgstr ""
 
 #: src/SettingsEnvironmentsSection.php:184
-#: src/SettingsEnvironmentsSection.php:262
+#: src/SettingsEnvironmentsSection.php:261
 msgid "Remove"
 msgstr ""
 
