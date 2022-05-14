@@ -13,7 +13,7 @@ declare( strict_types = 1 );
  * Version: 1.0.0
  * Requires PHP: 7.4
  * Requires at least: 4.7
- * Tested up to: 5.9
+ * Tested up to: 6.0
  * Network: true
  * Text Domain: drgnff-wp-stage-switcher
  * Domain Path: /lang

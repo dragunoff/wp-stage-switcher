@@ -6,7 +6,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Stable tag: 1.0.0
 Requires PHP: 7.4
 Requires at least: 4.7
-Tested up to: 5.9
+Tested up to: 6.0
 
 Quickly switch between environments (live, test, dev) from the admin bar.
 
