@@ -82,9 +82,9 @@ final class RenderUtils {
 			<?php
 			foreach ( $atts as $key => $val ) {
 				if ( is_bool( $val ) ) {
-					echo $val ? esc_attr( $key ) : '';
+					echo $val ? esc_attr( $key ) . "\n" : '';
 				} else {
-					printf( '%s="%s"', esc_attr( $key ), esc_attr( $val ) );
+					printf( '%s="%s"' . "\n", esc_attr( $key ), esc_attr( $val ) );
 				}
 			}
 			?>

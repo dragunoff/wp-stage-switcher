@@ -19,13 +19,7 @@ class Helpers {
 	}
 
 	public static function strip_whitespace( string $str ): string {
-		$whitespace = [
-			"\n",
-			"\r",
-			"\t",
-		];
-
-		return str_replace( $whitespace, '', $str );
+		return trim( preg_replace( [ '/\s/m', '/ {2,}/m', '/> </m' ], [ ' ', ' ', '><' ], $str ) );
 	}
 
 }

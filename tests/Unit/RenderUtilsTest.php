@@ -282,5 +282,43 @@ class RenderUtilsTest extends TestCase {
 		$this->assertSame( strlen( $template ), strlen( $output ) );
 	}
 
+	public function test_should_print_input_field_with_an_attribute_and_a_truthy_attribute(): void {
+		$id = Helpers::random_id();
+		$name = Helpers::random_id();
+		$value = null;
+		$attr = Helpers::random_id();
+		$attr_value = Helpers::random_id();
+		$bool_attr = Helpers::random_id();
+
+		$template = <<<HTML
+		<input
+			type="text"
+			id="{$id}"
+			name="{$name}"
+			value="{$value}"
+			class="js-drgnff-input"
+			{$attr}="{$attr_value}"
+			{$bool_attr}
+		/>
+		HTML;
+		$template = Helpers::strip_whitespace( $template );
+
+		ob_start();
+		RenderUtils::render_input(
+			'text',
+			$id,
+			$name,
+			$value,
+			[
+				$attr => $attr_value,
+				$bool_attr => true,
+			]
+		);
+		$output = Helpers::strip_whitespace( ob_get_clean() );
+
+		$this->assertStringStartsWith( $template, $output );
+		$this->assertSame( strlen( $template ), strlen( $output ) );
+	}
+
 }
 
